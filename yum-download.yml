@@ -1,0 +1,35 @@
+---
+- hosts: 127.0.0.1
+  become: true
+  tasks:
+  - name: Create temporary rpm directory
+    file:
+      state: directory
+      path: /rpm
+    register: tmp_rpm
+
+  - name: Find all rpm files in temporary directory
+    find:
+      paths: "{{ tmp_rpm.path }}"
+      patterns: "*.rpm"
+    register: rpm_files
+
+  - set_fact:
+      rpm_list: "{{ rpm_files.files | map(attribute='path') | list }}"
+
+  - set_fact:
+      extra_list: "{{ packages | list }}"
+
+  - name: Installing the rpm files from directory rpm
+    yum:
+      name: "{{ rpm_list }}"
+      state: present
+      download_only: yes
+      download_dir: /downloaded
+
+  - name: Installing the rpm files from extra vars
+    yum:
+      name: "{{ extra_list }}"
+      state: present
+      download_only: yes
+      download_dir: /downloaded

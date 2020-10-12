@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  yum:
+    image: yum-downloader:1.3
+    volumes:
+      - type: bind
+        source: ./rpm
+        target: /rpm
+      - type: bind
+        source: ./downloaded
+        target: /downloaded
+    environment: 
+      - PACKAGES=

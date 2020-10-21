@@ -12,4 +12,4 @@ services:
         source: ./downloaded
         target: /downloaded
     environment: 
-      - PACKAGES=
+      - PACKAGES=${PACKAGES}

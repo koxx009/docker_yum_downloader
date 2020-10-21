@@ -1,11 +1,12 @@
-FROM oraclelinux:7.8
+FROM centos:centos7.4.1708
 
 ARG PACKAGES
 
 ADD ./repos.d/*.repo /etc/yum.repos.d/
-ADD ./repos.d/ol7/*.repo /etc/yum.repos.d/
+ADD ./repos.d/centos7/*.repo /etc/yum.repos.d/
 
-RUN yum-config-manager --enable ol7_latest,ol7_optional_latest,ol7_addons,ol7_software_collections,ol7_developer_EPEL
+RUN yum-config-manager --enable centosplus
+RUN yum install epel-release -y 
 RUN yum install python python-pip -y
 RUN pip install ansible==2.10.0
 

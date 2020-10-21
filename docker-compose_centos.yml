@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  yumdownloader_centos:
+    build:
+      context: .
+      dockerfile: Dockerfile_centos
+    volumes:
+      - type: bind
+        source: ./rpm
+        target: /rpm
+      - type: bind
+        source: ./downloaded
+        target: /downloaded
+    environment: 
+      - PACKAGES=

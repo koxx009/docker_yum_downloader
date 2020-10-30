@@ -6,6 +6,8 @@ ADD ./repos.d/*.repo /etc/yum.repos.d/
 ADD ./repos.d/centos7/*.repo /etc/yum.repos.d/
 
 RUN yum-config-manager --enable centosplus
+RUN yum --enablerepo=extras install centos-release-scl
+RUN yum --enablerepo=extras install epel-release
 RUN yum install epel-release -y 
 RUN yum install python python-pip -y
 RUN pip install ansible==2.10.0

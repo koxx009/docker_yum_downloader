@@ -1,0 +1,5 @@
+[graphviz]
+name=Graphviz Stable - $basearch
+baseurl=https://www2.graphviz.org/Packages/stable/centos/7/os/$basearch
+enabled=1
+gpgcheck=0
